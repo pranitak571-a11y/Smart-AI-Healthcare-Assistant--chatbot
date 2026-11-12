@@ -1,0 +1,49 @@
+{% extends "base.html" %}
+
+{% block title %}Chat - Smart AI Healthcare Assistant{% endblock %}
+
+{% block content %}
+<section class="chat-shell">
+    <div class="chat-tools">
+        <button type="button" class="clear-btn" id="clearBtn">Clear chat</button>
+    </div>
+
+    <div class="chat-window" id="chatWindow">
+        <div class="message bot">
+            <div class="bubble">
+                Hi, I'm here to help. Tell me what symptoms you're experiencing, in your own words.
+            </div>
+        </div>
+    </div>
+
+    <div class="quick-panel" id="quickPanel" hidden>
+        <div class="quick-head">
+            <strong>Quick symptoms</strong>
+            <span>Tap the ones you have, then press Send</span>
+        </div>
+        <div class="quick-chips" id="quickChips"></div>
+    </div>
+
+    <form class="chat-input-row" id="chatForm">
+        <button type="button" class="plus-btn" id="plusBtn"
+                aria-label="Add common symptoms" aria-expanded="false"
+                aria-controls="quickPanel" title="Common symptoms"><span class="plus-icon">+</span></button>
+        <input
+            type="text"
+            id="userInput"
+            placeholder="e.g. I have a fever and headache"
+            autocomplete="off"
+            required>
+        <button type="submit" class="send-btn" aria-label="Send message">Send</button>
+    </form>
+
+    <p class="disclaimer">
+        ⚠️ This tool provides general information only and is not a diagnostic system.
+        Always consult a licensed medical professional.
+    </p>
+</section>
+{% endblock %}
+
+{% block scripts %}
+<script src="{{ url_for('static', filename='script.js') }}"></script>
+{% endblock %}

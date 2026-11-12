@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% block title %}Smart AI Healthcare Assistant{% endblock %}</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='layout.css') }}">
+</head>
+<body>
+
+{# This file is the shared frame: header + left sidebar. Every page fills the "content" block. #}
+{% set current = request.endpoint %}
+
+<div class="page app-shell">
+    <header class="header">
+        <div class="header-inner">
+            <div class="header-top">
+                <div class="brand">
+                    <span class="brand-mark">＋</span>
+                    <div>
+                        <h1>Smart AI Healthcare Assistant</h1>
+                        <p class="tagline">A calm first step, before you see a doctor</p>
+                    </div>
+                </div>
+                <div class="account-actions">
+                    <span>Hi, {{ user_name|title }}!</span>
+                    <form method="POST" action="{{ url_for('logout') }}">
+                        <button type="submit" class="logout-button">Log out</button>
+                    </form>
+                </div>
+            </div>
+            <svg class="pulse" viewBox="0 0 300 40"
+                 preserveAspectRatio="none" aria-hidden="true">
+                <polyline class="pulse-line"
+                    points="0,20 60,20 75,20 85,5 95,35 105,20 120,20 135,20 145,10 155,30 165,20 300,20"/>
+            </svg>
+        </div>
+    </header>
+
+    <div class="app-body">
+        <aside class="sidebar">
+            <nav class="sidebar-nav" aria-label="Main menu">
+                <span class="nav-heading">Menu</span>
+
+                <a href="{{ url_for('home') }}" class="nav-link {% if current == 'home' %}active{% endif %}"
+                   {% if current == 'home' %}aria-current="page"{% endif %}>
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>
+                    <span>Chat</span>
+                </a>
+
+                <a href="{{ url_for('dashboard') }}" class="nav-link {% if current == 'dashboard' %}active{% endif %}"
+                   {% if current == 'dashboard' %}aria-current="page"{% endif %}>
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><line x1="18" y1="20" x2="18" y2="10"/><line x1="12" y1="20" x2="12" y2="4"/><line x1="6" y1="20" x2="6" y2="14"/></svg>
+                    <span>Dashboard</span>
+                </a>
+
+                <a href="{{ url_for('emergency') }}" class="nav-link nav-danger {% if current == 'emergency' %}active{% endif %}"
+                   {% if current == 'emergency' %}aria-current="page"{% endif %}>
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg>
+                    <span>Emergency help</span>
+                </a>
+
+                <a href="{{ url_for('about') }}" class="nav-link {% if current == 'about' %}active{% endif %}"
+                   {% if current == 'about' %}aria-current="page"{% endif %}>
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="10"/><line x1="12" y1="16" x2="12" y2="12"/><line x1="12" y1="8" x2="12.01" y2="8"/></svg>
+                    <span>About</span>
+                </a>
+            </nav>
+        </aside>
+
+        <div class="content">
+            {% block content %}{% endblock %}
+        </div>
+    </div>
+</div>
+
+{% block scripts %}{% endblock %}
+</body>
+</html>

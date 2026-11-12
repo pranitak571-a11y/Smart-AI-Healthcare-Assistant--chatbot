@@ -1,0 +1,43 @@
+{% extends "base.html" %}
+
+{% block title %}Emergency help - Smart AI Healthcare Assistant{% endblock %}
+
+{% block content %}
+<section class="info-page">
+    <h2 class="page-title">Emergency help</h2>
+    <p class="page-sub">If you or someone near you is in danger, do not use the chat. Call for help right now.</p>
+
+    <div class="call-grid">
+        <a class="call-card" href="tel:112">
+            <span class="call-number">112</span>
+            <span class="call-label"><strong>National emergency number</strong>Police, fire and ambulance</span>
+        </a>
+        <a class="call-card" href="tel:108">
+            <span class="call-number">108</span>
+            <span class="call-label"><strong>Ambulance</strong>Free medical emergency service in most states</span>
+        </a>
+    </div>
+    <p class="page-note">Helpline numbers can change over time. 112 is meant to work all over India.</p>
+
+    <div class="panel">
+        <h3>Get help straight away if you have</h3>
+        <ul class="check-list">
+            <li>Chest pain or pressure</li>
+            <li>Difficulty breathing</li>
+            <li>Bleeding that will not stop</li>
+            <li>Fainting or loss of consciousness</li>
+            <li>Sudden weakness, a drooping face or slurred speech</li>
+            <li>Swelling of the face or throat, or a severe allergic reaction</li>
+            <li>A seizure, or sudden confusion</li>
+            <li>Thoughts of harming yourself</li>
+        </ul>
+    </div>
+
+    <a class="map-btn" href="https://www.google.com/maps/search/hospitals+near+me" target="_blank" rel="noopener noreferrer">
+        Find hospitals near me
+        <span class="map-hint">(opens Google Maps)</span>
+    </a>
+
+    <p class="page-disclaimer">This page is general information. This assistant cannot call anyone for you and is not a replacement for a doctor.</p>
+</section>
+{% endblock %}

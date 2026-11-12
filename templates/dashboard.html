@@ -1,0 +1,78 @@
+{% extends "base.html" %}
+
+{% block title %}Dashboard - Smart AI Healthcare Assistant{% endblock %}
+
+{% block content %}
+<section class="info-page">
+    <h2 class="page-title">Your dashboard</h2>
+    <p class="page-sub">A quick summary of how you have used the assistant. Only counts are kept here, never your messages.</p>
+
+    <div class="stat-grid">
+        <div class="stat-card">
+            <span class="stat-value">{{ total }}</span>
+            <span class="stat-label">Symptom checks</span>
+        </div>
+        <div class="stat-card {% if emergencies %}stat-alert{% endif %}">
+            <span class="stat-value">{{ emergencies }}</span>
+            <span class="stat-label">Emergency alerts</span>
+        </div>
+        <div class="stat-card">
+            <span class="stat-value">{% if helpful_rate is not none %}{{ helpful_rate }}%{% else %}&ndash;{% endif %}</span>
+            <span class="stat-label">Replies you found helpful</span>
+        </div>
+        <div class="stat-card">
+            <span class="stat-value">{{ rated }}</span>
+            <span class="stat-label">Replies rated</span>
+            <span class="stat-note">{{ likes }} liked &middot; {{ dislikes }} not helpful</span>
+        </div>
+    </div>
+
+    <div class="panel">
+        <h3>Conditions suggested to you</h3>
+        {% if top_conditions %}
+        <ul class="bar-list">
+            {% for item in top_conditions %}
+            <li class="bar-row">
+                <span class="bar-name">{{ item.name }}</span>
+                <span class="bar-track"><span class="bar-fill" style="width: {{ item.percent }}%"></span></span>
+                <span class="bar-count">{{ item.times }}&times;</span>
+            </li>
+            {% endfor %}
+        </ul>
+        {% else %}
+        <p class="empty-note">Nothing here yet. <a href="{{ url_for('home') }}">Open the chat</a> and describe how you feel.</p>
+        {% endif %}
+    </div>
+
+    <div class="panel">
+        <h3>Recent checks</h3>
+        {% if recent %}
+        <ul class="recent-list">
+            {% for row in recent %}
+            <li class="recent-row">
+                {% if row.kind == 'match' %}
+                    <span class="badge badge-match">Suggested</span>
+                    <span class="recent-text">{{ row.condition_name }}</span>
+                {% elif row.kind == 'emergency' %}
+                    <span class="badge badge-alert">Emergency alert</span>
+                    <span class="recent-text">Advised to get urgent help</span>
+                {% else %}
+                    <span class="badge badge-muted">Unclear</span>
+                    <span class="recent-text">Could not match the symptoms</span>
+                {% endif %}
+                <time class="recent-time local-time" datetime="{{ row.when_utc }}">{{ row.when_utc }}</time>
+            </li>
+            {% endfor %}
+        </ul>
+        {% else %}
+        <p class="empty-note">Your recent checks will appear here.</p>
+        {% endif %}
+    </div>
+
+    <p class="page-disclaimer">This dashboard is only a summary of your use of this tool. It is not medical advice.</p>
+</section>
+{% endblock %}
+
+{% block scripts %}
+<script src="{{ url_for('static', filename='dashboard.js') }}"></script>
+{% endblock %}

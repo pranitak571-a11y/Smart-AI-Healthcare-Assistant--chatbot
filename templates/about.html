@@ -1,0 +1,42 @@
+{% extends "base.html" %}
+
+{% block title %}About - Smart AI Healthcare Assistant{% endblock %}
+
+{% block content %}
+<section class="info-page">
+    <h2 class="page-title">About this assistant</h2>
+    <p class="page-sub">A college project that gives general, first-step guidance about common health symptoms. It is not a doctor.</p>
+
+    <div class="panel">
+        <h3>How it works</h3>
+        <ol class="step-list">
+            <li><strong>You describe how you feel.</strong> Type in English, Marathi or Hindi, or tap the + button for quick symptoms.</li>
+            <li><strong>It picks out the symptoms it knows.</strong> It also checks for signs of an emergency.</li>
+            <li><strong>It compares them with common conditions</strong> and ranks the closest matches.</li>
+            <li><strong>You get a short answer:</strong> possible conditions, a basic self-care tip and a reminder to see a doctor.</li>
+        </ol>
+    </div>
+
+    <div class="panel">
+        <h3>What it cannot do</h3>
+        <ul class="plain-list">
+            <li>It cannot diagnose. Its suggestions are only possibilities and can be wrong.</li>
+            <li>It covers common, non-emergency conditions only.</li>
+            <li>It does not recommend medicines or doses.</li>
+            <li>It is not for emergencies. See the <a href="{{ url_for('emergency') }}">Emergency help</a> page.</li>
+        </ul>
+    </div>
+
+    <div class="panel">
+        <h3>Your data</h3>
+        <ul class="plain-list">
+            <li>Your password is stored in a scrambled (hashed) form, never as plain text.</li>
+            <li>Your chat is saved to your account so you can continue later. <strong>Clear chat</strong> removes it from your history.</li>
+            <li>If you press the thumbs up or down, that message and reply are saved with your rating, to help improve the tool.</li>
+            <li>The dashboard only keeps counts, not your messages.</li>
+        </ul>
+    </div>
+
+    <p class="page-disclaimer">Always consult a licensed medical professional about your health.</p>
+</section>
+{% endblock %}
